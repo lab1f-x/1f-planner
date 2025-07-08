@@ -9,14 +9,23 @@
     body {
   background: white;
   font-family: sans-serif;
-  margin: 0; /* 余白ゼロ */
-  height: 100vh; /* 画面いっぱい */
+  margin: 0;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* 下寄せ */
-  align-items: center; /* 横中央 */
-  padding: 0 10vw 10vh 10vw; /* 左右に10%ずつ、下に10%の余裕 */
-  box-sizing: border-box; /* paddingを含めたサイズ調整 */
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10vh 10vw 15vh 10vw; /* 上10%、左右10%、下15% */
+  box-sizing: border-box;
+}
+
+#app-container {
+  width: 80vw;
+  max-width: 400px;
+  height: 60vh; /* 高さを控えめに */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
     /* 操作ボタン */
     .controls {
@@ -94,15 +103,6 @@
       color: #999;
       margin-top: 5px;
     }
-  
-  #app-container {
-    width: 80vw;
-    max-width: 400px;
-    height: 70vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
 
   </style>
 </head>
