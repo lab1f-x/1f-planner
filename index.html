@@ -7,15 +7,16 @@
   <style>
     /* ─────── 全体レイアウト ─────── */
     body {
-      background: white;
-      font-family: sans-serif;
-  margin: 0; /* ← 余白ゼロに */
-  height: 100vh; /* ← ビューポートの高さいっぱいに */
+  background: white;
+  font-family: sans-serif;
+  margin: 0; /* 余白ゼロ */
+  height: 100vh; /* 画面いっぱい */
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* ← 下寄せ */
-  align-items: center; /* 中央寄せはそのまま */
-  padding-bottom: 40px; /* ← 下に少し余裕（任意） */
+  justify-content: flex-end; /* 下寄せ */
+  align-items: center; /* 横中央 */
+  padding: 0 10vw 10vh 10vw; /* 左右に10%ずつ、下に10%の余裕 */
+  box-sizing: border-box; /* paddingを含めたサイズ調整 */
 }
     /* 操作ボタン */
     .controls {
@@ -93,6 +94,16 @@
       color: #999;
       margin-top: 5px;
     }
+  
+  #app-container {
+    width: 80vw;
+    max-width: 400px;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
   </style>
 </head>
 
