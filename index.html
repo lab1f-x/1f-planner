@@ -9,11 +9,14 @@
     body {
       background: white;
       font-family: sans-serif;
-      margin: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+  margin: 0; /* ← 余白ゼロに */
+  height: 100vh; /* ← ビューポートの高さいっぱいに */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* ← 下寄せ */
+  align-items: center; /* 中央寄せはそのまま */
+  padding-bottom: 40px; /* ← 下に少し余裕（任意） */
+}
     /* 操作ボタン */
     .controls {
       margin-bottom: 10px;
