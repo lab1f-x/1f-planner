@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -87,6 +86,40 @@
       text-align: center;
       margin-top: 10px;
     }
+
+    /* ===== モーダル用CSS ===== */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+    }
+    .modal-content {
+      background-color: white;
+      margin: 5% auto;
+      padding: 20px;
+      border-radius: 6px;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      position: relative;
+    }
+    .close-button {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font-size: 1.5em;
+      cursor: pointer;
+      color: #666;
+    }
+    .modal-text {
+      max-height: 70vh;
+      overflow-y: auto;
+      font-size: 14px;
+    }
   </style>
 </head>
 <body>
@@ -107,7 +140,72 @@
       <div class="grid" id="grid"></div>
     </div>
 
-    <div class="footer">© 研究棟1f 2025</div>
+    <div class="footer">
+      © 研究棟1f 2025　
+      <button id="help-toggle" style="float:right;">？</button>
+    </div>
+  </div>
+
+  <!-- ===== モーダルの中身（使い方） ===== -->
+  <div id="help-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" id="modal-close">×</span>
+      <div class="modal-text">
+        <h2>使い方について</h2>
+        <h3>■ このテンプレートの目的</h3>
+        <p>
+          このテンプレートは、1日の活動量や作業量を視覚的に把握し、手書きで予定を整理するためのスクリーンショット用テンプレートです。
+          時間に縛られず、自由な順序・大きさで予定を組み立てることができるため、
+          とくにADHD傾向のある方にも扱いやすい設計を意図しています。
+        </p>
+
+        <h3>■ 使用手順</h3>
+        <ol>
+          <li>画面右上のボタンで「カラフル／モノクロ」表示を切り替える</li>
+          <li>気に入った状態でスクリーンショットを撮影する</li>
+          <li>スマホのUIが映り込むのが気になる場合は、「📷画像として保存」ボタンで保存し、ペーストするときれいに使えます</li>
+          <li>iPhoneのメモアプリなどに貼り付け、手書きで予定を書き込む</li>
+        </ol>
+
+        <h3>■ ブロック表示について</h3>
+        <ul>
+          <li>表示されるブロックは、1日の予定量を想定してランダムに生成されます（全体の約75〜85％が埋まるよう調整されています）</li>
+          <li>ブロック同士はくっつけて大きな予定を作る／分けて細かくするなど、ユーザーの自由な想像で使い方を調整してください</li>
+          <li>モノクロ版では、自分で線や区切りを引き込むことで、細かい調整がしやすくなります</li>
+          <li>カラフル版では、すでに区切られた形を使って予定の詰め方を考える練習ができます</li>
+        </ul>
+
+        <h3>■ カレンダーについて</h3>
+        <ul>
+          <li>画面右上には、1か月分の簡易カレンダーが表示されます（日曜日始まり・週ごとの段組み）</li>
+          <li>日付はドットで表現され、数字は表示されません。おおよその位置感覚を視覚的に把握できます</li>
+          <li>土日祝は赤、当日は青い枠で表示されます</li>
+        </ul>
+
+        <h3>■ メモ欄について</h3>
+        <p>
+          画面左上の白紙部分は、スクリーンショット後に使える自由記入スペースです。書き込む内容はユーザーの自由ですが、以下のような用途に向いています：
+        </p>
+        <ul>
+          <li>買い物メモ</li>
+          <li>連絡が必要な人・内容</li>
+          <li>覚え書き（忘れたくないひとことなど）</li>
+          <li>今日ではないが意識しておきたい締切日（※毎日書き続けることで忘れにくくなります）</li>
+          <li>そのほか、タグ・気分・目標など自由に活用してください</li>
+        </ul>
+
+        <h3>■ 著作権について</h3>
+        <p>
+          このテンプレートは個人利用を目的としており、第三者の著作物を無断で模倣・再配布・自作として発信することは禁止されています。
+          また、テンプレートのオリジナルデザインは「研究棟1F」に帰属します。
+          他者による無断転載・再配布・無断の画像利用などに対して、適切に対処できるよう、著作権の所在を明示しています。
+        </p>
+
+        <p style="margin-top: 2em;">
+          ご意見・ご要望があれば、お気軽にXまたはnoteにてご連絡ください。
+        </p>
+      </div>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
@@ -213,10 +311,6 @@
         if (date.getDay() === 0 || date.getDay() === 6) {
           cell.classList.add('weekend');
         }
-        const key = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-        if (holidays.includes(key)) {
-          cell.classList.add('weekend');
-        }
         if (date.toDateString() === today.toDateString()) {
           cell.classList.add('today');
         }
@@ -224,6 +318,25 @@
       }
     }
     generateCalendar();
+
+    // モーダル制御
+    document.addEventListener('DOMContentLoaded', function() {
+      const toggleBtn = document.getElementById('help-toggle');
+      const modal = document.getElementById('help-modal');
+      const closeBtn = document.getElementById('modal-close');
+
+      toggleBtn.addEventListener('click', function() {
+        modal.style.display = 'block';
+      });
+      closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+      });
+      window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
+    });
   </script>
 </body>
 </html>
